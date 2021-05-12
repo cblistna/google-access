@@ -71,17 +71,19 @@
       </div>
     </div>
     <script>
+      // get query params prefilled by Google
       const params = new URLSearchParams(window.location.search);
       const code = params.get("code");
       const state = params.get("state").split(",");
       const clientId = state[0];
       const clientSecret = state[1];
 
+      // compose command for producing access and refresh tokens
       const cmd = `curl -k -X POST -F "code=${code}" -F "client_id=${clientId}" -F "client_secret=${clientSecret}" -F "redirect_uri=http://localhost:5500/token.html" -F "grant_type=authorization_code" https://oauth2.googleapis.com/token`;
-
       const curlCmd = document.getElementById("curlCmd");
       curlCmd.innerHTML = cmd;
 
+      // parse result
       const parseResult = document.getElementById("parseResult");
       parseResult.addEventListener("click", (event) => {
         const response = JSON.parse(
@@ -93,6 +95,7 @@
         document.getElementById("accessToken").value = response.access_token;
       });
 
+      // add copy to clipboard command to each input label
       const labels = document.getElementsByTagName("label");
       for (let i = 0; i < labels.length; i++) {
         const label = labels[i];
