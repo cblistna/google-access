@@ -45,7 +45,7 @@
           ></small
         >
         <textarea id="scopes" rows="5" cols="80" class="form-control">
-https://www.googleapis.com/auth/drive.metadata
+https://www.googleapis.com/auth/drive.metadata.readonly
 https://www.googleapis.com/auth/calendar.events.readonly</textarea
         >
       </div>
@@ -65,6 +65,7 @@ https://www.googleapis.com/auth/calendar.events.readonly</textarea
         const state = `${clientId},${clientSecret}`;
         const redirectUri = "http://localhost:5500/token.html";
         const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scopes}&access_type=offline&include_granted_scopes=true&state=${state}`;
+        console.log(scopes);
         console.log(url);
         window.location.href = url;
       });
